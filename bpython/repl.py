@@ -1,29 +1,27 @@
 # -*- coding: utf-8 -*-
 
-"""
-The MIT License
+# The MIT License
 
-Copyright (c) 2009-2011 the bpython authors.
-Copyright (c) 2012-2013,2015 Sebastian Ramacher
+# Copyright (c) 2009-2011 the bpython authors.
+# Copyright (c) 2012-2013,2015 Sebastian Ramacher
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-"""
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 
 import code
 import inspect
@@ -604,7 +602,7 @@ class Repl(object):
                 try:
                     fake_cursor = self.current_line.index(func) + len(func)
                     f = simpleeval.evaluate_current_attribute(
-                        fake_cursor, self.current_line, self.interp.locals)
+                            fake_cursor, self.current_line, self.interp.locals)
                 except simpleeval.EvaluationError:
                     return False
         except Exception:
@@ -773,13 +771,13 @@ class Repl(object):
             indentation = 0
         return indentation
 
-    def formatforfile(self, stdout):
+    def formatforfile(self, session_ouput):
         """Format the stdout buffer to something suitable for writing to disk,
         i.e. without >>> and ... at input lines and with "# OUT: " prepended to
         output lines."""
 
         def process():
-            for line in stdout.split('\n'):
+            for line in session_ouput.split('\n'):
                 if line.startswith(self.ps1):
                     yield line[len(self.ps1):]
                 elif line.startswith(self.ps2):
@@ -820,7 +818,7 @@ class Repl(object):
                 self.interact.notify(_('Save cancelled.'))
                 return
 
-        stdout_text = self.formatforfile(self.getstdout())
+        session_test = self.formatforfile(self.getstdout())
 
         try:
             with open(fn, mode) as f:
@@ -1072,7 +1070,6 @@ class Repl(object):
     def clear_current_line(self):
         """This is used as the exception callback for the Interpreter instance.
         It prevents autoindentation from occurring after a traceback."""
-        # XXX: Empty function
 
     def send_to_external_editor(self, text):
         """Returns modified text from an editor, or the original text if editor
@@ -1111,7 +1108,6 @@ class Repl(object):
                                                       'sample-config')
                     if py3:  # py3 files need unicode
                         default_config = default_config.decode('ascii')
-                    #bpython_dir, script_name = os.path.split(__file__)
                     containing_dir = os.path.dirname(
                         os.path.abspath(self.config.config_path))
                     if not os.path.exists(containing_dir):
